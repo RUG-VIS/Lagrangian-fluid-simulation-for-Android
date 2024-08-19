@@ -54,7 +54,7 @@ The following list of 3rd party applications was used in this project:
 - [netcdf-c](https://github.com/Unidata/netcdf-c) 4.9.2
 - [netcdf-cxx](https://github.com/Unidata/netcdf-cxx4) 4.3.1
 
-The libraries above have already been compiled for Android into shader objects (.so) and included in the project. Thus, there is no need to recompile them. However, follow the `simulation/third_party/` instructions if you need to recompile them anyway.
+The libraries above have already been compiled for Android into shared objects (.so) and included in the project. Thus, there is no need to recompile them. However, follow the `simulation/third_party/` instructions if you need to recompile them anyway.
 
  The following 3rd party C++ libraries were used in the native implementation:
 - [GLM](https://github.com/g-truc/glm) 1.0.1
