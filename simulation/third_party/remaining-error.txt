@@ -1,0 +1,29 @@
+The remaining error when compiling is with NetCDF C, which fails as it cannot import the backtrace (which is N/A on android).
+See compile log below.
+
+
+libtool: compile:  /home/christian/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang -DHAVE_CONFIG_H -I. -I.. -I../include -I../include -I../libnczarr -I/home/christian/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include --sysroot /home/christian/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -I/home/christian/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include --sysroot /home/christian/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -fno-strict-aliasing -MT libdispatch_la-nclog.lo -MD -MP -MF .deps/libdispatch_la-nclog.Tpo -c nclog.c  -fPIC -DPIC -o .libs/libdispatch_la-nclog.o
+nclog.c:307:13: error: call to undeclared function 'backtrace'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  307 |     nptrs = backtrace(buffer, MAXSTACKDEPTH);
+      |             ^
+nclog.c:307:13: note: did you mean 'ncbacktrace'?
+nclog.c:300:1: note: 'ncbacktrace' declared here
+  300 | ncbacktrace(void)
+      | ^
+  301 | {
+  302 |     int j, nptrs;
+  303 |     void* buffer[MAXSTACKDEPTH];
+  304 |     char **strings;
+  305 | 
+  306 |     if(getenv("NCBACKTRACE") == NULL) return;
+  307 |     nptrs = backtrace(buffer, MAXSTACKDEPTH);
+      |             ~~~~~~~~~
+      |             ncbacktrace
+nclog.c:308:15: error: call to undeclared function 'backtrace_symbols'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  308 |     strings = backtrace_symbols(buffer, nptrs);
+      |               ^
+nclog.c:308:13: error: incompatible integer to pointer conversion assigning to 'char **' from 'int' [-Wint-conversion]
+  308 |     strings = backtrace_symbols(buffer, nptrs);
+      |             ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+
